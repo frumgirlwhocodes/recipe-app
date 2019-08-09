@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   root 'static#home' 
-
-  resources :users
-  resources :recipes 
+  
+  resources :users, only: [:new, :create, :show] do 
+  
+      resources :recipes
+  end 
+  
 
   get '/signin', to: "sessions#signin"
 	post '/signin', to: "sessions#create"
