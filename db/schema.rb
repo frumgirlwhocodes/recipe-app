@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_020339) do
+ActiveRecord::Schema.define(version: 2019_08_09_022441) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 2019_08_09_020339) do
     t.boolean "like"
     t.integer "user_id"
     t.integer "recipe_id"
+  end
+
+  create_table "recipe_ingredients", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "ingredients_id"
   end
 
   create_table "recipes", force: :cascade do |t|
