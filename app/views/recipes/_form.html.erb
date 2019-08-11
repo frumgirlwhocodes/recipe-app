@@ -1,0 +1,37 @@
+
+
+<%= form_for(@recipe) do |f| %>
+
+<% if recipe.errors.any? %>
+
+  <h4><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h4>
+    <ul>
+      <% recipe.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
+    <%= f.label :name, "Recipe Name" %>
+    <%= f.text_field :name %>
+
+    <%= f.label :cook_time %>
+    <%= f.text_field :cook_time %>
+
+    <%= f.label :directions %>
+    <%= f.text_area :directions, rows: 15 %>
+
+      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+    
+<ol>
+    <h3>Ingredients</h3>
+	      <%= f.fields_for(:recipe_ingredients) do |ri| %>
+	       <%= render 'recipe_ingredient_fields', f: ri  %>
+        <% end %>
+        <%= link_to_add_association 'Add Ingredient', f, :recipe_ingredients,
+        'data-association-insertion-node' => "#recipe-ingredients ol",
+         'data-association-insertion-method' => "append",
+         :wrap_object => Proc.new {|ri| ri.build_ingredient; ri } %>
+
+    <%= f.submit 'Submit'  %>
+<% end %>

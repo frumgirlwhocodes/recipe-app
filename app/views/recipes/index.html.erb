@@ -1,0 +1,11 @@
+
+<h2> Our Library of Recipes</h2>
+
+<% @recipes.each do |recipe| %>
+    <h2><%= link_to recipe.name, user_recipe_path(recipe)%></h2>
+    <% end %>
+
+
+
+
+<%= link_to "Add Your Own Recipe", new_user_recipe_path %>

@@ -12,15 +12,18 @@ class UsersController < ApplicationController
 			@user.save
 			flash[:success] = 'Your account has been created successfully'
 			session[:user_id] = @user.id
+	 
 			redirect_to user_path(@user)
 		else
 			render new_user_path
 		end
-    end
+	end
+	
     
     def show 
 
-        @user = User.find_by(:id => params[:id])
+	 @user=current_user 
+	 @recipes=@user.recipes 
 
     end 
 private 

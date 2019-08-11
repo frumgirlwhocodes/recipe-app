@@ -1,0 +1,44 @@
+<h1><%= @recipe.name %></h1>
+	</div>
+</div>
+		
+			<div ><strong>Created by: <%= @recipe.user.name %> 
+		 <%= link_to @recipe.user.username, user_recipes_path(@recipe.user) %></strong></div> 
+	  </div>
+	  
+	  <h4>Ingredients</h4>
+	  <% @recipe.recipe_ingredients.each do |ri| %>
+	   <ul>
+		   <li><%= ri.ingredient.name %> </li> 
+	   </ul>
+	 <% end %> 
+	 <h4>Directions/h4>
+			<p><%= @recipe.directions %></p>
+			
+		<h4> Cook Time <h4> 
+		<%= @recipe.cook_time %> 
+
+		<h2>Comment(s)</h2>
+		<% @recipe.comments.each do |comment| %>
+			<%= comment.user.name %></strong> commented:<%= comment.body %>
+			<% end %>
+
+			<% if current_user %>
+      <h4>Add a comment:</h4>
+        <%= form_for @comment, url: recipe_comments_path(@recipe, @comment)  do |f| %>
+           <p><%= f.text_area :body %></p>
+          <button type="submit" >Create Comment</button>
+        <% end %>
+    <% else %>
+   <p>Please login in order to add a comment.</p>
+  <% end %>
+ 
+
+
+
+	 <% if @recipe.user == current_user %> 
+	 <h4> To Edit The Recipe: <h4> 
+<%= link_to 'Edit',  edit_recipe_path %>
+<h4> To Delete This Recipe <h4> 
+<%= link_to 'Delete', user_recipe_path(@recipe), method: :delete, data:{confirm: "Are you sure?"} %>
+    

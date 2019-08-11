@@ -1,0 +1,15 @@
+<%= render 'shared/page_title', title: 'Create a new Recipe' %>
+
+
+<% if flash[:error].present %> 
+<%= flash[:error] %> 
+
+<%= form_for(@user, url: "signin") do |f| %> 
+    <div class="form-group"> 
+    <%= f.lable :name %> 
+    <%= f.text_field :name %> 
+    <%= f.lable :email %> 
+    <%= f.text_feild :email %> 
+    <%= f.lable :password %> 
+    <%= f.text_feild :password_digest %> 
+    <%= f.submit "signin" %> 

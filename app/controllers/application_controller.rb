@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
 helper_method :current_user, :requre_login
 
-    def current_user 
- if session[:user_id].present? 
-    user=User.find_by(id: session[:user_id])
-    end 
-end 
+private 
+def current_user
+  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+end
+
 
 def require_login
     unless current_user

@@ -1,3 +1,6 @@
+
+<%= render 'shared/page_title', title: "Create a New User to start" %> 
+
 <% if !@user.errors.empty? %>
 	<ul>
 		<% @user.errors.full_messages.each do |error|%>
@@ -17,3 +20,4 @@
         <%= f.password_field :password_digest %>
 
         <%= f.submit "Register New User", class: 'btn btn-success' %> 
+        <% end %> 

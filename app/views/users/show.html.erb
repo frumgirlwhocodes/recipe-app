@@ -1,3 +1,15 @@
 <h1> "Welcome <%= @user.name %> " </h1> 
-<%= link_to "Add Recipe", new_user_recipe_path(@user), class: "btn btn-sm btn-primary" %>
-<%= link_to "Log out", sessions_path %> 
+
+<h2>Email: <%= @user.email %></h2>
+  <h2>GitHub  UID: <%= @user.uid %></h2>
+  <img src="<%= @user.image %>">
+
+  <%= link_to('Log in with GitHUb!', '/auth/github') %>
+
+
+<p> <h3> 
+  You have <%= @recipes.count %> Recipies <h3> </p>
+  <p> 
+<%= link_to "Add Recipe", new_user_recipe_path(@user) %> </p> 
+
+<%= link_to "Log out", signout_path %> 
