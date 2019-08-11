@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
           flash[:success]= 'Comment was successfully created.' 
         
         else
-         redirect_to @recipe, notice: "You can't leave the comment box blank.Please try again!" }
+         redirect_to new_user_recipe_path(@recipe)
          
         end
       end
