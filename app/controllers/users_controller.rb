@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 			@user.save
 			flash[:success] = 'Your account has been created successfully'
 			session[:user_id] = @user.id
-	 
+	 current_user=@user 
 			redirect_to user_path(@user)
 		else
 			render new_user_path

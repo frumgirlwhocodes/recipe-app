@@ -55,7 +55,9 @@ before_action :set_recipe, only: [:edit, :show, :update]
           :quantity,
           :recipe_id,
           :ingredient_id,
-          ingredient_attributes: [:id, :name]]))
+          ingredient_attributes: [:id, :name]])
+
+     end 
 
      def set_recipe
         @recipe = Recipe.find(params[:id])
