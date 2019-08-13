@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'omniauth'
 gem "omniauth-github", '1.1.1'
+gem "omniauth-rails_csrf_protection"
 gem 'dotenv-rails'
 
 group :development, :test do
