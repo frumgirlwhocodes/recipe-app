@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
       resources :recipes
   end 
-  resources :recipes, only: [:new, :create, :index]
+  resources :recipes, only: [:new, :create,  :index]
 
   resources :comments, only: %i[create destroy]
 

@@ -3,7 +3,7 @@
 
 <% if @recipe.errors.any? %>
 
-  <h4><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h4>
+  <h4><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h4>
     <ul>
       <% @recipe.errors.full_messages.each do |message| %>
       <li><%= message %></li>

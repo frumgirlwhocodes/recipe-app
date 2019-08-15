@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 before_action :set_recipe, only: [:edit, :show, :update]
    def index 
-    @recent_recipes=Recipe.Recently_added_recipes
+    @recent_recipes=Recipe.recently_added_recipes
     if params[:user_id]
       @recipes = User.find(params[:user_id]).recipes
     else 
@@ -54,8 +54,8 @@ before_action :set_recipe, only: [:edit, :show, :update]
      
      private 
      def recipes_params 
-        params.require(:recipe).permit(:name, :description, :cook_time, user_id, ingredient_id:[], 
-          ingredient_attributes: [:id, :name])
+        params.require(:recipe).permit(:name, :description, :cook_time, :user_id,  ingredient_id:[], 
+          ingredients_attributes: [:id, :name])
 
      end 
 

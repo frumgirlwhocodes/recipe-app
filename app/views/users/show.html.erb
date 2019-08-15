@@ -8,8 +8,11 @@
 
 
 <p> <h3> 
-  You have <%= @recipes.count %> Recipies <h3> </p>
+  You have <%= @recipes.count %> Recipie(s) <h3> </p>
   <p> 
+  <%= link_to "View Recipies", user_recipes_path  %> </p>
+  <p> 
+
 <%= link_to "Add Recipe", new_user_recipe_path(@user) %> </p> 
 
 <%= link_to "Log out", signout_path %> 

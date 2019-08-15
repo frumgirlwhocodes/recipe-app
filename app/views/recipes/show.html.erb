@@ -3,11 +3,11 @@
 </div>
 		
 			<div ><strong>Created by: <%= @recipe.user.name %> 
-		 <%= link_to @recipe.user.username, user_recipes_path(@recipe.user) %></strong></div> 
+		 <%= link_to @recipe.user.user.name, user_recipes_path(@recipe.user) %></strong></div> 
 	  </div>
 	  
 	  <h4>Ingredients</h4>
-	  <% @recipe.recipe_ingredients.each do |ri| %>
+	  <% @recipe.ingredients.each do |ri| %>
 	   <ul>
 		   <li><%= ri.ingredient.name %> </li> 
 	   </ul>
