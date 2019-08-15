@@ -23,7 +23,7 @@ before_action :set_recipe, only: [:edit, :show, :update]
         @recipe.user=current_user 
         if @recipe.save 
             flash[:success]= "Your recipe was created successfully"
-            redirect_to user_recipes_path 
+            redirect_to user_recipe_path(@recipe)
         else 
             render :new 
         end   
@@ -54,11 +54,8 @@ before_action :set_recipe, only: [:edit, :show, :update]
      
      private 
      def recipes_params 
-        params.require(:recipe).permit(:name, :description, :cook_time, user_id, recipe_ingredients_attributes: [
-          :id,
-          :recipe_id,
-          :ingredient_id,
-          ingredient_attributes: [:id, :name]])
+        params.require(:recipe).permit(:name, :description, :cook_time, user_id, ingredient_id:[], 
+          ingredient_attributes: [:id, :name])
 
      end 
 

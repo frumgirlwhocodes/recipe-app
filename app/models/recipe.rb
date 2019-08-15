@@ -9,7 +9,14 @@ class Recipe < ApplicationRecord
     validates :name, uniqueness: true
     validates :recipe_ingredients, presence: true
    
-    accepts_nested_attributes_for :recipe_ingredients
+    accepts_nested_attributes_for :ingredients 
+
+    def ingredients_attributes=(ingredient_attributes)
+        ingredient_attributes.values.each do |ingredient_attributes|
+          ingredient = Ingredient.find_or_create_by(ingredient_attributes)
+          self.ingredients << ingredient 
+        end
+      end
 
  
 

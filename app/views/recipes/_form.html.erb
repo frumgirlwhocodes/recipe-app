@@ -24,9 +24,10 @@
     
 <ol>
     <h3>Ingredients</h3>
-	      <%= f.fields_for(:recipe_ingredients) do |ri| %>
-	       <%= render 'recipe_ingredient_fields', f: ri  %>
-        <% end %>
+    <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %>
+    <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
+      <%= ingredients_fields.text_field :name %>
+    <% end %>
         
 
     <%= f.submit 'Submit'  %>
