@@ -39,7 +39,15 @@ ActiveRecord::Schema.define(version: 2019_08_11_221646) do
     t.datetime "updated_at", null: false
   end
 
-# Could not dump table "users" because of following StandardError
-#   Unknown type 'sring' for column 'image'
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "provider"
+    t.string "uid"
+    t.string "image"
+  end
 
 end

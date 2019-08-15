@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
 
     def signin 
         @user=User.new 
-
     end 
     def login_with_auth   
         auth = request.env["omniauth.auth"]    
@@ -15,15 +14,15 @@ class SessionsController < ApplicationController
     end 
 
     def create 
-        @user=current_user
+       
+        @user= User.find_by(name: params[:user][:name])
+ 
    if @user && @user.authenticate(params[:user][:password])
-   
        session[:user_id]=@user.id 
-    
     redirect_to user_path(@user)
    else 
     flash[:errors]= "Incorrect Username and Password"
-    render 'sessions/signin'
+    render :signin
     end 
 end 
 

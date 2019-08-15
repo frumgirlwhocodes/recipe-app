@@ -39,6 +39,8 @@ gem 'omniauth'
 gem "omniauth-github", '1.1.1'
 gem "omniauth-rails_csrf_protection"
 gem 'dotenv-rails'
+gem "pry"
+gem "bcrypt"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -60,7 +62,6 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
-  gem "bcrypt"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,17 +1,21 @@
 class RecipesController < ApplicationController
 before_action :set_recipe, only: [:edit, :show, :update]
    def index 
+    @recent_recipes=Recipe.Recently_added_recipes
     if params[:user_id]
-			@recipes = User.find(params[:user_id]).recipes
+      @recipes = User.find(params[:user_id]).recipes
+    else 
+      @recipes=Recipe.all 
 
    end 
-   
+  end 
+  
 
-   
     def new 
-        @recipe=Recipe.new 
-
- end 
+      
+      @recipe = Recipe.new
+  
+      end 
 
 
     def create 
@@ -47,12 +51,11 @@ before_action :set_recipe, only: [:edit, :show, :update]
       
         end
 
-     end 
+     
      private 
      def recipes_params 
         params.require(:recipe).permit(:name, :description, :cook_time, user_id, recipe_ingredients_attributes: [
           :id,
-          :quantity,
           :recipe_id,
           :ingredient_id,
           ingredient_attributes: [:id, :name]])

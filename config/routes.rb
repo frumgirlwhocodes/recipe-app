@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'static#home' 
   
-  resources :users, only: [:new, :create, :show] do 
+  resources :users, only: [ :new, :create, :show] do 
   
       resources :recipes
   end 
+  resources :recipes, only: [:new, :create, :index]
 
   resources :comments, only: %i[create destroy]
 

@@ -10,5 +10,12 @@ class Recipe < ApplicationRecord
     validates :recipe_ingredients, presence: true
    
     accepts_nested_attributes_for :recipe_ingredients
+
+ 
+
+    def self.recently_added_recipes
+        Recipe.last(4).reverse
+         end
+
     
 end
