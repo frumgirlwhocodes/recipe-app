@@ -6,6 +6,7 @@ before_action :set_recipe, only: [:edit, :show, :update]
       @recipes = User.find(params[:user_id]).recipes
     else 
       @recipes=Recipe.all 
+      render 'recipies/index'
 
    end 
   end 

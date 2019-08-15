@@ -9,9 +9,12 @@
 
 <p> <h3> 
   You have <%= @recipes.count %> Recipie(s) <h3> </p>
-  <p> 
-  <%= link_to "View Recipies", user_recipes_path  %> </p>
-  <p> 
+  <p>  
+  <% @recipes.each do |recipe|  %> </p>
+ <li> <%= link_to recipe.name, user_recipe_path(@user, recipe) %> </li> 
+  <% end %> 
+
+    <p> 
 
 <%= link_to "Add Recipe", new_user_recipe_path(@user) %> </p> 
 
