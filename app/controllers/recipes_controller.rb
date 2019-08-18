@@ -1,12 +1,13 @@
 class RecipesController < ApplicationController
-before_action :set_recipe, only: [:edit, :show, :update]
-   def index 
+before_action :set_recipe, only: [:edit, :show, :update, :destroy]
+ 
+def index 
     @recent_recipes=Recipe.recently_added_recipes
     if params[:user_id]
       @recipes = User.find(params[:user_id]).recipes
     else 
       @recipes=Recipe.all 
-      render 'recipies/index'
+      render :index 
 
    end 
   end 
@@ -31,6 +32,7 @@ before_action :set_recipe, only: [:edit, :show, :update]
     end 
 
     def show 
+      @recipe=Recipe.find(params[:id])
       if current_user
         @comment = current_user.comments.build(recipe: @recipe)
       end
@@ -52,10 +54,15 @@ before_action :set_recipe, only: [:edit, :show, :update]
       
         end
 
+        def destroy
+          @recipe.destroy
+          redirect_to @recipe, notice: "Recipe successfully destroyed."
+        end
+
      
      private 
      def recipes_params 
-        params.require(:recipe).permit(:name, :description, :cook_time, :user_id,  ingredient_id:[], 
+        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_id:[], 
           ingredients_attributes: [:id, :name])
 
      end 
