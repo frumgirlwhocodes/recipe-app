@@ -29,6 +29,11 @@
           <button type="submit" >Create Comment</button>
         <% end %>
   
+		<% if @recipe.user == current_user %>
+	<%= link_to 'Edit',  edit_recipe_path %>
+	%= link_to 'Delete', recipe_path, method: :delete, data:{confirm: "Are you sure?"} %>
+    
+	<% end %>
  
 
 
