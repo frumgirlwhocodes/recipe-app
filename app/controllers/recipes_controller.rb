@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
-before_action :set_recipe, only: [:edit, :show, :update, :destroy]
- 
+before_action :set_recipe, only: [:show,:edit,:update,:destroy]
+
 def index 
     @recent_recipes=Recipe.recently_added_recipes
     if params[:user_id]
@@ -22,11 +22,11 @@ def index
 
     def create 
         @recipe= Recipe.new(recipes_params)
-        @recipe.user=current_user 
+        @user=current_user 
+        @recipe.user=@user 
         if @recipe.save 
-            flash[:success]= "Your recipe was created successfully"
-            redirect_to user_recipe_path(@recipe)
-        else 
+          
+            redirect_to user_recipe_path(@user, @recipe), notice: "Your recipe was successfully created" 
             render :new 
         end   
     end 
@@ -62,7 +62,7 @@ def index
      
      private 
      def recipes_params 
-        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_id:[], 
+        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_id: [:id], 
           ingredients_attributes: [:id, :name])
 
      end 

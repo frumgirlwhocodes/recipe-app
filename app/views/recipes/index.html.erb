@@ -4,16 +4,16 @@
 
 
 <% @recipes.each do |recipe| %>
-    <h2><%= link_to recipe.name, user_recipe_path(recipe)%></h2>
+    <h2><%= link_to recipe.name, recipe_path(recipe)%></h2>
     <% end %>
 
     <h3>  Recently Added Recipes </h3> 
 <% @recent_recipes.each do |recipe| %>
    <h3> <%= recipe.name %> </h3> 
-   <%= link_to recipe.name, user_recipe_path(recipe) %> 
+   <%= link_to recipe.name, recipe_path(recipe) %> 
    <% end %> 
 
 
 <h3> Add a New Recipe </h3> 
 
-<%= link_to "Add A New Recipe", new_user_recipe_path %>
+<%= link_to "Add Your Own Recipe", new_recipe_path %>

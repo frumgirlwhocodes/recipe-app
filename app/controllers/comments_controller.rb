@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
           flash[:success]= 'Comment was successfully created.' 
         
         else
-         redirect_to new_user_recipe_path(@recipe)
+         redirect_to new_user_recipe_path(@re
          
         end
       end
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
       def destroy
         @comment = @recipe.comments.find(params[:id])
         @comment.destroy
-        redirect_to root_path 
+        redirect_to root_path, notice: 'Comment was successfully destroyed.'
       end 
   
   
