@@ -22,16 +22,21 @@ def index
       redirect_to recipes_path, alert: "No User Found"
        else 
       @recipe = Recipe.new(user_id: params[:user_id])
-  
+     10.times do @recipe.ingredients.build 
+     end 
       end 
+    end 
 
 
     def create 
         @recipe= Recipe.new(recipes_params)
+        @recipe.user=current_user 
+
       
-        if @recipe.save 
+        if @recipe.save
+      
           
-            redirect_to @recipe, notice: "Your recipe was successfully created" 
+            redirect_to user_recipe_path(@recipe.user, @recipe), notice: "Your recipe was successfully created" 
 
         else 
             render :new 
@@ -43,15 +48,14 @@ def index
      @user=User.find_by(id: params[:user_id])
      @recipe=@user.recipes.find_by(id: params[:id])
      if @recipe.nil?
-      redirect_to user_recipes_path(@recipe), alert: "Recipe not found"
+      redirect_to user_recipes_path(@recipe.user, @recipe), alert: "Recipe not found"
     end
   else
     @recipe = Recipe.find(params[:id])
   end
-      if current_user
+     if current_user
         @comment = current_user.comments.build(recipe: @recipe)
-      end
-
+     end 
     end 
 
      def edit 
@@ -68,9 +72,7 @@ def index
       end
     end
 
-     end 
-
-     def update 
+         def update 
       @recipe = Recipe.find(params[:id])
 
          @recipe.update(recipes_params)
@@ -83,19 +85,16 @@ def index
         end
 
         def destroy
-          @recipe.Recipe.find(params[:id])
+          @recipe=Recipe.find(params[:id])
           @recipe.destroy
           redirect_to recipes_path, notice: "Recipe successfully destroyed."
         end
 
      
      private 
+    
      def recipes_params 
-        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_id: [ ], 
+        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_ids: [ ], 
           ingredients_attributes: [:id, :name])
-
      end 
-
-     
-
-end
+    end 

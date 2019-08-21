@@ -5,14 +5,14 @@ class CommentsController < ApplicationController
     def create
       @comment = current_user.comments.create(comment_params)
       @comment.recipe = @recipe
+      
     
         if @comment.save
-          redirect_to user_recipe_path( @recipe) 
-          flash[:success]= 'Comment was successfully created.' 
+          redirect_to @recipe, notice: 'Comment was successfully created.'
         
         else
-         redirect_to new_user_recipe_path(@re
-         
+          redirect_to @recipe, notice: "You can't leave the comment box blank.Please try again!"
+      
         end
       end
     
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
     private
   
     def set_recipe
-      @recipe = Recipe.find(params[:recipe_id])
+      @recipe = Recipe.find_by(id: params[:recipe_id])
     end
   
     def comment_params

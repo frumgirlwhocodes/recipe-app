@@ -24,7 +24,7 @@
 
 		
       <h4>Add a comment:</h4>
-        <%= form_for @comment, url: comments_path(@recipe, @comment)  do |f| %>
+        <%= form_for @comment, url: comments_path(@recipe, @comment, @recipe.user)  do |f| %>
            <p><%= f.text_area :body %></p>
           <button type="submit" >Create Comment</button>
         <% end %>
@@ -34,7 +34,8 @@
 
 
 	 <h4> To Edit The Recipe: <h4> 
-(<%= link_to 'Edit',  edit_user_recipe_path(@recipe.user, @recipe) if @recipe.user %>)
+<%= link_to 'Edit',  edit_user_recipe_path(@recipe.user, @recipe) if @recipe.user %>
 <h4> To Delete This Recipe <h4> 
 <%= link_to 'Delete', user_recipe_path(@recipe.user, @recipe), method: :delete, data:{confirm: "Are you sure?"} %>
-<%= link_to "All Recipes", recipes_path %>     
+<p> 
+<%= link_to "All Recipes", recipes_path %>     </p>
