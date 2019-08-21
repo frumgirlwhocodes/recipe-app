@@ -24,7 +24,7 @@
 
 		
       <h4>Add a comment:</h4>
-        <%= form_for @comment, url: comments_path(@recipe, @comment, @recipe.user)  do |f| %>
+        <%= form_for @comment, url: recipe_comments_path(@recipe, @comment, @recipe.user)  do |f| %>
            <p><%= f.text_area :body %></p>
           <button type="submit" >Create Comment</button>
         <% end %>
