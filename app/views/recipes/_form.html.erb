@@ -26,7 +26,7 @@
     
 <ol>
     <h3>Ingredients</h3>
-   <p>  <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %> </p>
+   
     <%= f.fields_for :ingredients do |ingredients_fields| %>
      <br> <%= ingredients_fields.text_field :name %>
     <% end %>
