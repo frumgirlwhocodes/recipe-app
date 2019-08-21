@@ -1,38 +1,53 @@
 class RecipesController < ApplicationController
-before_action :set_recipe, only: [:show,:edit,:update,:destroy]
 
 def index 
     @recent_recipes=Recipe.recently_added_recipes
     if params[:user_id]
-      @recipes = User.find(params[:user_id]).recipes
+      @user = User.find(params[:user_id])
+      if @user.nil?
+        redirect_to recipes_path, alert: "User not found"
     else 
+      @recipes= @user.recipes 
+    end 
+  else 
       @recipes=Recipe.all 
-      render :index 
+      render :index
 
    end 
   end 
   
 
-    def new 
-      
-      @recipe = Recipe.new
+    def  new 
+       if params[:user_is] && !User.exists?(params[:user_id])
+      redirect_to recipes_path, alert: "No User Found"
+       else 
+      @recipe = Recipe.new(user_id: params[:user_id])
   
       end 
 
 
     def create 
         @recipe= Recipe.new(recipes_params)
-        @user=current_user 
-        @recipe.user=@user 
+      
         if @recipe.save 
           
-            redirect_to user_recipe_path(@user, @recipe), notice: "Your recipe was successfully created" 
+            redirect_to @recipe, notice: "Your recipe was successfully created" 
+
+        else 
             render :new 
         end   
     end 
 
     def show 
-      @recipe=Recipe.find(params[:id])
+      if params[:user_id]
+     @user=User.find_by(id: params[:user_id])
+     @recipe=@user.songs.find_by(id: params[:id])
+     if @recipe.nil?
+      redirect_to user_recipes_path(@recipe), alert: "Recipe not found"
+    end
+  else
+    @Recipe = Recipe.find(params[:id])
+  end
       if current_user
         @comment = current_user.comments.build(recipe: @recipe)
       end
@@ -40,14 +55,27 @@ def index
     end 
 
      def edit 
-
+      if params[:user_id]
+        user = User.find_by(id: params[:user_id])
+        if user.nil?
+          redirect_to recipes_path, alert: "User not found"
+        else
+          @recipe = user.recipes.find_by(id: params[:id])
+          redirect_to user_recipes_path(user), alert: "Recipe not found" if @recipe.nil?
+        end
+      else
+        @recipe = Recipe.find(params[:id])
+      end
+    end
 
      end 
 
      def update 
-        if @recipe.update(recipes_params)
-            flash[:success] = 'Your recipe was updated successfully'
-            redirect_to user_recipe_path(@recipe)
+      @recipe = Recipe.find(params[:id])
+
+         @recipe.update(recipes_params)
+         if @recipe.save 
+            redirect_to @recipe
           else
             render :edit
           end
@@ -55,21 +83,19 @@ def index
         end
 
         def destroy
+          @recipe.Recipe.find(params[:id])
           @recipe.destroy
-          redirect_to @recipe, notice: "Recipe successfully destroyed."
+          redirect_to recipes_path, notice: "Recipe successfully destroyed."
         end
 
      
      private 
      def recipes_params 
-        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_id: [:id], 
+        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_id: [ ], 
           ingredients_attributes: [:id, :name])
 
      end 
 
-     def set_recipe
-        @recipe = Recipe.find(params[:id])
-      end
-
+     
 
 end
