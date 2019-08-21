@@ -29,16 +29,12 @@
           <button type="submit" >Create Comment</button>
         <% end %>
   
-		<% if @recipe.user == current_user %>
-	<%= link_to 'Edit',  edit_recipe_path %>
-	%= link_to 'Delete', recipe_path, method: :delete, data:{confirm: "Are you sure?"} %>
-    
-	<% end %>
+
  
 
 
 	 <h4> To Edit The Recipe: <h4> 
-<%= link_to 'Edit',  edit_user_recipe_path(@recipe) %>
+(<%= link_to 'Edit',  edit_user_recipe_path(@recipe.user, @recipe) if @recipe.user %>)
 <h4> To Delete This Recipe <h4> 
-<%= link_to 'Delete', user_recipe_path(@recipe), method: :delete, data:{confirm: "Are you sure?"} %>
-    
+<%= link_to 'Delete', user_recipe_path(@recipe.user, @recipe), method: :delete, data:{confirm: "Are you sure?"} %>
+<%= link_to "All Recipes", recipes_path %>     

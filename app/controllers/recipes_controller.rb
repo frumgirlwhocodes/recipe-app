@@ -18,7 +18,7 @@ def index
   
 
     def  new 
-       if params[:user_is] && !User.exists?(params[:user_id])
+       if params[:user_id] && !User.exists?(params[:user_id])
       redirect_to recipes_path, alert: "No User Found"
        else 
       @recipe = Recipe.new(user_id: params[:user_id])
@@ -41,12 +41,12 @@ def index
     def show 
       if params[:user_id]
      @user=User.find_by(id: params[:user_id])
-     @recipe=@user.songs.find_by(id: params[:id])
+     @recipe=@user.recipes.find_by(id: params[:id])
      if @recipe.nil?
       redirect_to user_recipes_path(@recipe), alert: "Recipe not found"
     end
   else
-    @Recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(params[:id])
   end
       if current_user
         @comment = current_user.comments.build(recipe: @recipe)

@@ -21,6 +21,11 @@
     <%= f.text_area :directions, rows: 15 %>
 
       <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+
+      <br>
+   <%= user_select(@recipe, @recipe.user) %><br>
+  <br />
+
     
 <ol>
     <h3>Ingredients</h3>
