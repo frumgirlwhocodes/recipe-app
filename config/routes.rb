@@ -9,7 +9,7 @@ resources :recipes
 
   resources :comments, only: %i[create destroy]
 
-  get "/auth/:provider/callback" => "sessions#login_with_auth"
+  get "/auth/:provider/callback", to: "sessions#login_with_auth"
   get '/signin', to: "sessions#signin"
 	post '/signin', to: "sessions#create"
   get "/signout" => "sessions#destroy", :as => :signout
