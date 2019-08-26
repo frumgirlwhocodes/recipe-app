@@ -3,11 +3,15 @@ Rails.application.routes.draw do
   
   resources :users do 
   
-      resources :recipes
+      resources :recipes do 
+
+        resources :comments, only: %i[create destroy]
   end 
+end 
+
 resources :recipes
 
-  resources :comments, only: %i[create destroy]
+  
 
   get "/auth/:provider/callback", to: "sessions#login_with_auth"
   get '/signin', to: "sessions#signin"

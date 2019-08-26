@@ -22,6 +22,7 @@ def index
       redirect_to recipes_path, alert: "No User Found"
        else 
       @recipe = Recipe.new(user_id: params[:user_id])
+    
      10.times do @recipe.ingredients.build 
      end 
       end 
