@@ -40,3 +40,5 @@
 <%= link_to 'Delete', user_recipe_path(@recipe.user, @recipe), method: :delete, data:{confirm: "Are you sure?"} %>
 <p> 
 <%= link_to "All Recipes", user_recipes_path(@recipe.user) %>     </p>
+
+<%= link_to "Log out", signout_path %> 

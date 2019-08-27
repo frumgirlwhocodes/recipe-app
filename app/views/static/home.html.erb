@@ -7,15 +7,25 @@
 
       <h1 align="center">Welcome to MyRecipes App</h1>
 
+
+
+      <% if session[:user_id] %>
+  <h1><%= @user.name %></h1>
+  <h2>Email: <%= @user.email %></h2>
+  <h2>Facebook UID: <%= @user.uid %></h2>
+  <img src="<%= @user.image %>">
+<% else %>
+
     
 <h2> Sign Up </h2>
  <p>  <%= link_to 'Sign up now!', new_user_path %>  <p> 
 
  <h2> Or </h2> 
- <p>  <%= link_to('Log in with GitHUb!', '/auth/github/callback') %>  </p> 
+ <p> <%= link_to('Log in with Facebook!', '/auth/facebook') %>  </p> 
 
 
 <h3>  If you already have a account sign in  bellow </h3> 
 <%= link_to "Log in ", signin_path %> 
+<% end %> 
 
 <h3>  you  can add a new recipe or update your recipes, create comment and  much much more! </h3> 

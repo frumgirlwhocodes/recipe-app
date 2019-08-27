@@ -6,10 +6,16 @@ class SessionsController < ApplicationController
         @user=User.new 
     end 
     def login_with_auth   
-        auth = request.env["omniauth.auth"]    
-         @user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
-         User.create_with_omniauth(auth)  
-            session[:user_id] = @user.id   
+        @user = User.find_or_create_by(uid: auth['uid']) do |u|
+            u.name = auth['info']['name']
+            u.email = auth['info']['email']
+            u.image = auth['info']['image']
+          end
+      
+          session[:user_id] = @user.id
+          @auth = auth
+          
+
       redirect_to root_path, :notice => "Signed in!" 
     end 
 
@@ -32,5 +38,11 @@ redirect_to root_path
 
 end 
 
+private 
 
+def auth
+    request.env['omniauth.auth']
+  end
 end 
+
+

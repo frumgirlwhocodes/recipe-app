@@ -13,7 +13,7 @@ resources :recipes
 
   
 
-  get "/auth/:provider/callback", to: "sessions#login_with_auth"
+get '/auth/facebook/callback' => "sessions#login_with_auth"
   get '/signin', to: "sessions#signin"
 	post '/signin', to: "sessions#create"
   get "/signout" => "sessions#destroy", :as => :signout
