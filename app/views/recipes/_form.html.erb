@@ -20,8 +20,6 @@
     <%= f.label :directions %>
     <%= f.text_area :directions, rows: 15 %>
 
-      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-
     
     
 <ol>
@@ -29,6 +27,7 @@
    <p>  <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %> </p>
     <%= f.fields_for :ingredients do |ingredients_fields| %>
      <br> <%= ingredients_fields.text_field :name %>
+     
     <% end %>
         
 

@@ -5,18 +5,14 @@ class SessionsController < ApplicationController
     def signin 
         @user=User.new 
     end 
-    def login_with_auth   
-        @user = User.find_or_create_by(uid: auth['uid']) do |u|
-            u.name = auth['info']['name']
-            u.email = auth['info']['email']
-            u.image = auth['info']['image']
-          end
-      
-          session[:user_id] = @user.id
-          @auth = auth
-          
 
-      redirect_to root_path, :notice => "Signed in!" 
+    def login_with_auth   
+        @user = User.find_by_provider_and_uid(provider: auth['provider'], uid: auth['uid']) 
+        || User.create_with_omniauth(auth)
+            
+          session[:user_id] = @user.id  
+
+      redirect_to user_path(@user), :notice => "Signed in!" 
     end 
 
     def create 
