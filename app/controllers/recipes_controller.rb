@@ -17,18 +17,17 @@ def index
   end 
   
 
-    def  new 
-       if params[:user_id] && !User.exists?(params[:user_id])
-      redirect_to recipes_path, alert: "No User Found"
-       else 
-      @recipe = Recipe.new(user_id: params[:user_id])
+  def  new 
+    if params[:user_id] && !User.exists?(params[:user_id])
+   redirect_to recipes_path, alert: "No User Found"
+    else 
+   @recipe = Recipe.new(user_id: params[:user_id])
+ 
+  10.times do @recipe.ingredients.build 
+  end 
+   end 
+ end
     
-     10.times do @recipe.ingredients.build 
-     end 
-      end 
-    end 
-
-
     def create 
         @recipe= Recipe.new(recipes_params)
         @recipe.user=current_user 
@@ -96,6 +95,6 @@ def index
     
      def recipes_params 
         params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_ids: [ ], 
-          ingredients_attributes: [:id, :name])
+          ingredients_attributes: [:id, :name], recipe_ingredients_attributes: [:quantity] )
      end 
     end 

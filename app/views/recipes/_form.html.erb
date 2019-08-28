@@ -24,12 +24,17 @@
     
 <ol>
     <h3>Ingredients</h3>
-   <p>  <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %> </p>
+    <p> <%= f.collection_select :ingredient_ids, Ingredient.order('name ASC').all, :id, :name, include_blank: 'Select Ingredeint' %> </p>
     <%= f.fields_for :ingredients do |ingredients_fields| %>
-     <br> <%= ingredients_fields.text_field :name %>
+      <br> Name <%= ingredients_fields.text_field :name %>
+      <% end %> 
+      <% f.fields_for :recipe_ingredients do |recipe_ingredients_attr| %> 
+        <br> Quantity <%= recipe_ingredients_attr.text_field :quantity %>
+
+     <% end %>
+      
      
-    <% end %>
-        
+      
 
     <%= f.submit 'Submit'  %>
 <% end %>
