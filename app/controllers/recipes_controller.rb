@@ -23,7 +23,7 @@ def index
     else 
    @recipe = Recipe.new(user_id: params[:user_id])
  
-   @ingredients = 6.times.collect { @recipe.recipe_ingredients.build }
+   @ingredients = 8.times.collect { @recipe.recipe_ingredients.build }
   end 
   
  end
@@ -34,7 +34,7 @@ def index
 
       
         if @recipe.save
-          @recipe.add_ingredients_to_recipe(recipe_ingredient_params)
+          @recipe.ingredients_to_recipe(recipe_ingredient_params)
           redirect_to user_recipe_path(@recipe.user, @recipe), notice: "Your recipe has successfully been added"
         else
           
@@ -77,7 +77,7 @@ def index
 
          @recipe.update(recipes_params)
          if @recipe.save 
-          @recipe.add_ingredients_to_recipe(recipe_ingredient_params)
+          @recipe.ingredients_to_recipe(recipe_ingredient_params)
             redirect_to @recipe
           else
             render :edit
