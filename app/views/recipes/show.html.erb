@@ -21,8 +21,10 @@
 
 		<h2>Comment(s)</h2>
 		<% @recipe.comments.each do |comment| %>
+			<ol> 
 			<%= comment.user.name %></strong> commented:<br>
 			<%= comment.body %>
+			</ol> 
 			<% end %>
 
 		

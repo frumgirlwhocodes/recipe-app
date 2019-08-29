@@ -7,16 +7,30 @@ class Recipe < ApplicationRecord
 
     validates :name, presence: true 
     validates :name, uniqueness: true
-    validates :recipe_ingredients, presence: true
+    
    
     accepts_nested_attributes_for :ingredients 
+    accepts_nested_attributes_for :recipe_ingredients 
 
-    def ingredients_attributes=(ingredient_attributes)
-        ingredient_attributes.values.each do |ingredient_attributes|
-          ingredient = Ingredient.find_or_create_by(ingredient_attributes)
-          self.ingredients << ingredient 
+    def add_ingredients_to_recipe(params)
+      
+      params[:recipe_ingredients_attributes].each do |k, recipe_ingredient|
+  
+        if recipe_ingredient[:ingredient][:name].present?
+          ingredient_name = recipe_ingredient[:ingredient][:name].downcase
+          ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+        elsif recipe_ingredient[:ingredient_id].present?
+          ingredient = Ingredient.find_by(id: recipe_ingredient[:ingredient_id])
         end
+  
+        if recipe_ingredient[:quantity].present?
+          RecipeIngredient.create(quantity: recipe_ingredient[:quantity], ingredient_id: ingredient.id, recipe_id: self.id )
+        end
+  
       end
+  
+    end
+
 
  
 

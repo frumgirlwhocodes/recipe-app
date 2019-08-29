@@ -23,9 +23,9 @@ def index
     else 
    @recipe = Recipe.new(user_id: params[:user_id])
  
-  10.times do @recipe.ingredients.build 
+   @ingredients = 6.times.collect { @recipe.recipe_ingredients.build }
   end 
-   end 
+  
  end
     
     def create 
@@ -34,11 +34,10 @@ def index
 
       
         if @recipe.save
-      
+          @recipe.add_ingredients_to_recipe(recipe_ingredient_params)
+          redirect_to user_recipe_path(@recipe.user, @recipe), notice: "Your recipe has successfully been added"
+        else
           
-            redirect_to user_recipe_path(@recipe.user, @recipe), notice: "Your recipe was successfully created" 
-
-        else 
             render :new 
         end   
     end 
@@ -65,6 +64,7 @@ def index
           redirect_to recipes_path, alert: "User not found"
         else
           @recipe = user.recipes.find_by(id: params[:id])
+          @i = 3.times.collect { @recipe.recipe_ingredients.build }
           redirect_to user_recipes_path(user), alert: "Recipe not found" if @recipe.nil?
         end
       else
@@ -77,6 +77,7 @@ def index
 
          @recipe.update(recipes_params)
          if @recipe.save 
+          @recipe.add_ingredients_to_recipe(recipe_ingredient_params)
             redirect_to @recipe
           else
             render :edit
@@ -94,7 +95,10 @@ def index
      private 
     
      def recipes_params 
-        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id,  ingredient_ids: [ ], 
-          ingredients_attributes: [:id, :name], recipe_ingredients_attributes: [:quantity] )
+        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id)
      end 
+
+     def recipe_ingredient_params
+      params.require(:recipe).permit(recipe_ingredients_attributes: [:quantity, :ingredient_id, ingredient: [:name]])
+    end
     end 
