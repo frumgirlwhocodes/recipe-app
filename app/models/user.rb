@@ -1,7 +1,11 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  
    has_many :recipes 
    has_many :comments 
    has_secure_password 
+   
    
    validates :name, presence: true, length: { minimum: 3, maximum: 40 }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
@@ -10,12 +14,12 @@ class User < ApplicationRecord
                       format: { with: VALID_EMAIL_REGEX }
    
                       def self.from_omniauth(auth)
-                        where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-                  
-                          user.email = auth.info.email
-                          user.password = Devise.friendly_token[0, 20]
+                        where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+                          user.provider = auth.provider
+                          user.uid = auth.uid
                           user.name = auth.info.name
-                          binding.pry
+                    
+                          user.save!
                         end
                       end
 
