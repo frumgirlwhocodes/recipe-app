@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
 
     def signin 
         @user=User.new 
+       
     end 
 
     def login_with_auth   

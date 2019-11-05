@@ -10,9 +10,9 @@ def index
       @recipes= @user.recipes 
     end 
   else 
-      @recipes=Recipe.all 
-      render :index
-
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @recipes}
    end 
   end 
   

@@ -1,37 +1,45 @@
 
 
 <h1><%= @recipe.name %></h1>
-	</div>
-</div>
+	
 		
-			<div ><strong>Created by: <%= @recipe.user.name %> 
-		
+			<div class= "chefName"><strong>Created by: Chef <%= @recipe.user.name %> 
+			<%= link_to @recipe.user.name, user_recipe_path(@recipe, @recipe.user) %> 
+			</strong>  
+		</div>  
 	  
 	  <h4>Ingredients</h4>
 	  <ul>  
   <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-    <li><%= "#{recipe_ingredient.quantity} #{recipe_ingredient.ingredient.name}" %></li>
+	<ul>
+    <li class="recipeIngredeints"> <%= "#{recipe_ingredient.quantity} #{recipe_ingredient.ingredient.name}" %></li>
   <% end %>
 </ul> 
 	 <h4>Directions </h4>
-			<p><%= @recipe.directions %></p>
+			<p> <div class= "recipeSteps"> <%= @recipe.directions %> </div> </p>
 			
 		<h4> Cook Time <h4> 
 		<%= @recipe.cook_time %> 
 
 		<h2>Comment(s)</h2>
+		<hr> 
+		<div id= "submited-comments"> 
 		<% @recipe.comments.each do |comment| %>
-			<ol> 
-			<%= comment.user.name %></strong> commented:<br>
-			<%= comment.body %>
-			</ol> 
+			<blockquote>
+			<div class= "comment-detials" id="comment-<%= comment.id %>"> 
+			
+			<strong class= "commentName"><%= comment.user.name %></strong>
+			 commented: <span class= "commentBody"><br>
+			<%= comment.body %> </span>	
+			</div> 
+			</blockquote>
 			<% end %>
-
+</div> 
 		
       <h4>Add a comment:</h4>
         <%= form_for @comment, url: user_recipe_comments_path(@recipe.user, @recipe, @comment)  do |f| %>
            <p><%= f.text_area :body %></p>
-          <button type="submit" >Create Comment</button>
+          <button type="submit" class="btn btn-sm btn-primary" >Create Comment</button>
         <% end %>
   
 

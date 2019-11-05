@@ -1,14 +1,17 @@
 
-
+<div class="container" style="border-bottom:1px solid black">
 <h1> "Welcome <%= @user.name %> " </h1> 
+</div> 
 
 <h2>Email: <%= @user.email %></h2>
   <h2>GitHub  UID: <%= @user.uid %></h2>
-  <img src="<%= @user.image %>">
 
-<p> <h3> 
+
+<p> 
   You have <%= @recipes.count %> Recipie(s) <h3> </p>
   <p>  
+
+  
   <h3> Recipes: </h3> 
   <% @recipes.each do |recipe|  %> </p>
  <li> <%= link_to recipe.name, user_recipe_path(@user, recipe) %> </li> 

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 end 
 
 resources :recipes
-
+get '/user/profile' => 'users#show'
   
 
 get '/auth/facebook/callback' => "sessions#login_with_auth"
