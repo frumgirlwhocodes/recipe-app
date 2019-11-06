@@ -12,6 +12,7 @@ def index
         format.html {render :index}
         format.json {render json: @recipes}
     end 
+  end 
   else 
     @recipes = Recipe.all
     respond_to do |format|
@@ -51,12 +52,14 @@ end
       if params[:user_id]
      @user=User.find_by(id: params[:user_id])
      @recipe=@user.recipes.find_by(id: params[:id])
+    
      if @recipe.nil?
       redirect_to user_recipes_path(@recipe.user, @recipe), alert: "Recipe not found"
     end
   else
     @recipe = Recipe.find(params[:id])
-  end
+  
+end 
      if current_user
         @comment = current_user.comments.build(recipe: @recipe)
      end 

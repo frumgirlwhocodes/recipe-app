@@ -26,7 +26,7 @@
 		<div id= "submited-comments"> 
 		<% @recipe.comments.each do |comment| %>
 			<blockquote>
-			<div class= "comment-detials" id="comment-<%= comment.id %>"> 
+			<div class= "commentDetials" id="comment-<%= comment.id %>"> 
 			<strong class= "commentUserName"><%= comment.user.name %></strong>
 			 commented: <span class= "commentBody"><br>
 			<%= comment.body %> </span>	
@@ -42,6 +42,7 @@
         <% end %>
   
 
+	<a href="#" class="js-next" data-id="<%=@recipe.id%>">Next recipe </a>
  
 
 
