@@ -8,8 +8,12 @@ def index
         redirect_to recipes_path, alert: "User not found"
     else 
       @recipes= @user.recipes 
+      respond_to do |format|
+        format.html {render :index}
+        format.json {render json: @recipes}
     end 
   else 
+    @recipes = Recipe.all
     respond_to do |format|
       format.html {render :index}
       format.json {render json: @recipes}
