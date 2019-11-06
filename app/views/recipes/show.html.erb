@@ -1,10 +1,15 @@
-
-
+<div class="details-recipe">
+<div class="recipeName">
 <h1><%= @recipe.name %></h1>
-	
+</div>
+
+<h4>Description</h4>
+<div class="recipeDescription">
+<%= @recipe.description %> 
+</div>
 		
 			<div class= "chefName"><strong>Created by: Chef <%= @recipe.user.name %> <br>
-			<%= link_to @recipe.user.name, user_recipe_path(@recipe.user, @recipe) %> 
+			<%= link_to @recipe.user.name, user_path(@recipe.user) %> 
 			</strong>  
 		</div>  
 	  
@@ -20,6 +25,7 @@
 			
 		<h4> Cook Time <h4> 
 		<div class= "recipe-cook-time"> <%= @recipe.cook_time %> </div>  
+</div> 
 
 		<h2>Comment(s)</h2>
 		<hr> 
@@ -41,9 +47,6 @@
           <button type="submit" class="btn btn-sm btn-primary" >Create Comment</button>
         <% end %>
   
-
-	<a href="#" class="js-next" data-id="<%=@recipe.id%>">Next recipe </a>
- 
 
 
 	 <h4> To Edit The Recipe: <h4> 

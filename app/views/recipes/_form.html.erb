@@ -14,15 +14,18 @@
     <%= f.label :name, "Recipe Name" %>
     <%= f.text_field :name %>
 
+    <%= f.label :description, "Description" %>
+		<%= f.text_area :description, rows: 5%>
+
     <%= f.label :cook_time %>
     <%= f.text_field :cook_time %>
 
     <%= f.label :directions %>
-    <%= f.text_area :directions, rows: 15 %>
+    <%= f.text_area :directions, rows: 10 %>
 
     
     
-<ol>
+
     <h3>Ingredients</h3>
     <div>
     <%= f.fields_for :recipe_ingredients, @ingredients do |recipe_ingredient| %>
@@ -36,7 +39,7 @@
     </div>
       <% end %>
    </div>
-     
+   
       
      
       

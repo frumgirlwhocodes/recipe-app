@@ -1,19 +1,28 @@
 
+<div class= "recentRecipes"
+<h2>  Recently Added Recipes: </h2> 
+<% @recent_recipes.each do |recipe| %>
+    <ul> 
+<li>
+ <%= recipe.name %> 
+</li>
+</ul> 
+<%= link_to "click to view", recipe_path(recipe) %> 
+<% end %> 
+</div> 
+
+
 <h2> Our Library of Recipes</h2>
 <br> 
 
 
 <% @recipes.each do |recipe| %>
     <h2><%= link_to recipe.name, recipe_path(recipe)%></h2>
+    <p id="description-<%= recipe.id %>"> <%= truncate(recipe.description, length:25)%></p>
+              <a href="#" class="js-more"  data-id="<%= recipe.id %>">Read more</a>
     <% end %>
 <br>
-    <h3>  Recently Added Recipes: </h3> 
-<% @recent_recipes.each do |recipe| %>
-    <li>
-   <h3> <%= recipe.name %> </h3> 
-  </li>
-   <%= link_to "click to view", recipe_path(recipe) %> 
-   <% end %> 
+
 
 
 <h3> Add a New Recipe </h3> 

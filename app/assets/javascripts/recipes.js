@@ -1,5 +1,5 @@
 $(() => {
-    bindClickHandlers()
+    clickHandlers()
   })
 
 function Comment(comment) {
@@ -31,3 +31,5 @@ Comment.prototype.addData= function() {
       })
     })
   })
+
+  
