@@ -15,6 +15,7 @@ def index
       format.json {render json: @recipes}
    end 
   end 
+end 
   
 
   def  new 
