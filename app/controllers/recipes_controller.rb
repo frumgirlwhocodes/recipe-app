@@ -103,7 +103,7 @@ end
      private 
     
      def recipes_params 
-        params.require(:recipe).permit(:name, :directions, :cook_time, :user_id)
+        params.require(:recipe).permit(:name, :description, :directions, :cook_time, :user_id)
      end 
 
      def recipe_ingredient_params

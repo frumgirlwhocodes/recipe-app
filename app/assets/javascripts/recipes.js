@@ -2,6 +2,7 @@ $(() => {
     clickHandlers()
   })
 
+
 function Comment(comment) {
 this.id= comment.id 
 this.body= comment.body 

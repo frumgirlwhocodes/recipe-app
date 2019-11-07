@@ -18,7 +18,7 @@
 
 <% @recipes.each do |recipe| %>
     <h2><%= link_to recipe.name, recipe_path(recipe)%></h2>
-    <p id="description-<%= recipe.id %>"> <%= truncate(recipe.description, length:25)%></p>
+    <p id="description-<%= recipe.id %>"> <%= truncate(recipe.description, length:5)%></p>
               <a href="#" class="js-more"  data-id="<%= recipe.id %>">Read more</a>
     <% end %>
 <br>
