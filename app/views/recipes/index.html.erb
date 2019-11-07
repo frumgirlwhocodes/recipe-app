@@ -18,15 +18,16 @@
 
 <% @recipes.each do |recipe| %>
     <h2><%= link_to recipe.name, recipe_path(recipe)%></h2>
-    <p id="description-<%= recipe.id %>"> <%= truncate(recipe.description, length:5)%></p>
+    <p id="description-<%= recipe.id %>"> <%= truncate(recipe.description, length:25)%></p>
               <a href="#" class="js-more"  data-id="<%= recipe.id %>">Read more</a>
     <% end %>
 <br>
-
-
+<br> 
 
 <h3> Add a New Recipe </h3> 
 
-<%= link_to "Add  Recipe", new_user_recipe_path %>
+<%= link_to "Add  Recipe", new_user_recipe_path %><br> 
+<h3> Or  <h3> 
 
+<h3> Log Out   </h3> 
 <%= link_to "Log out", signout_path %> 

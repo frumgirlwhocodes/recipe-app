@@ -8,9 +8,10 @@
 <h4>Description</h4>
 <div class="recipeDescription">
 <%= @recipe.description %> 
-</div>
+</div><br> 
 		
 			<div class= "chefName"><strong>Created by: Chef <%= @recipe.user.name %> <br>
+			<p> Click Below To Veiw The Chef </p> 
 			<%= link_to @recipe.user.name, user_path(@recipe.user) %> 
 			</strong>  
 		</div>  
@@ -59,4 +60,3 @@
 <%= link_to "All Recipes", user_recipes_path(@recipe.user) %>     </p>
 
 <%= link_to "Log out", signout_path %> 
-# add in the next. 
