@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
           format.json { render json: @comment.errors, status: 400 }
         end
       end
-    end
+  end 
     
 
   
