@@ -1,26 +1,27 @@
-
-<div class="container" style="border-bottom:1px solid black">
-<h1> "Welcome <%= @user.name %> " </h1> 
+<div class= "container"> 
+<div class="container name" style="border-bottom:1px solid black">
+<h1> Welcome <%= @user.name %>  </h1> 
 </div> 
-
+<hr> 
 <h2>Email: <%= @user.email %></h2>
   <h2>GitHub  UID: <%= @user.uid %></h2>
 
-
-<p> 
-  You have <%= @recipes.count %> Recipie(s) <h3> </p>
-  <p>  
-
+  <ul class= "container details "> 
+<p> You have <%= @recipes.count %> Recipie(s)  </p>
   
-  <h3> Recipes: </h3> 
-  <% @recipes.each do |recipe|  %> </p>
+
+  <h3> Recipes: </h3>  
+  <% @recipes.each do |recipe|  %> 
  <li> <%= link_to recipe.name, user_recipe_path(@user, recipe) %> </li> 
   <% end %> 
+  
 
-    <p> 
+  
 
-<%= link_to "Add Recipe", new_user_recipe_path(@user) %> </p> 
+<p> <%= link_to "Add Recipe", new_user_recipe_path(@user) %> </p> 
 
 <p> <%= link_to "All Recipes", recipes_path %> </p>
 
-<%= link_to "Log out", signout_path %> 
+<p> <%= link_to "Log out", signout_path %> </p> 
+</ul>
+</div> 

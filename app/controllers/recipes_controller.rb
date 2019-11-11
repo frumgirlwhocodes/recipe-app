@@ -8,10 +8,6 @@ def index
         redirect_to recipes_path, alert: "User not found"
     else 
       @recipes= @user.recipes 
-      respond_to do |format|
-        format.html {render :index}
-        format.json {render json: @recipes}
-    end 
   end 
   else 
     @recipes = Recipe.all
@@ -52,16 +48,19 @@ end
       if params[:user_id]
      @user=User.find_by(id: params[:user_id])
      @recipe=@user.recipes.find_by(id: params[:id])
-    
+   
      if @recipe.nil?
       redirect_to user_recipes_path(@recipe.user, @recipe), alert: "Recipe not found"
     end
   else
-    @recipe = Recipe.find(params[:id])
-  
+    @recipe = Recipe.find(params[:id]) 
 end 
      if current_user
         @comment = current_user.comments.build(recipe: @recipe)
+     end 
+     respond_to do |format|
+			format.html {render :show}
+      format.json {render json: @recipe}
      end 
     end 
 

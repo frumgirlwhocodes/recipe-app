@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 end 
 
 resources :recipes
-get '/user/profile' => 'users#show'
+get '/user/page' => 'users#show'
 
   
 
