@@ -30,6 +30,21 @@ listenForSubmit()
     });
   });
 
+  $('.js-next').on("click", function(){
+    var nextId= parseInt($(".js-next").attr("data-id")) + 1;
+    $.get("/recipes" + nextId + ".json", function(data) {
+      var recipe=data;
+      $(".recipeName").text(recipe["name"]);
+      $(".chefName").text(recipe["user"]["name"]);
+      $(".recipeDescription").text(recipe["description"]);
+      $(".recipeCookTime").text(recipe["cook_time"]);
+      $(".recipeSteps").text(recipe["directions"]);
+      $(".commentBody").text(recipe["comments"]["body"]); 
+      $(".recipeIngredeints").text(recipe["recipe_ingredients"]);
+      $(".js-next").attr("data-id", recipe["id"]);
+    })
+  });
+
   };
 
 function User(user) {
