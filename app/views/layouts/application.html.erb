@@ -1,15 +1,49 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RecipeApp</title>
+ 
+ <title> Recipe App </title> 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag "recipes", 'data-turbolinks-track': 'reload'%>
+
   </head>
 
-  <body>
+  <body> 
+  <section class= "section">
+  <h1 class= "title"> RecipeApp </h1> 
+  <div id="main_content" class="container"> 
+<div class="column">  
+<% if session[:user_id] %> 
+<ul id="myNavbar"> 
+<li> <%= link_to "All Recipes", user_recipes_path(current_user) %> </li> 
+<li> <%= link_to "Add a new recipe", new_user_recipe_path(current_user) %> </li> 
+<li><%= link_to "My Profile", user_path(current_user), class:'user' %></li>
+<li><a href="#"><%=current_user.name %></a></li> 
+<li><%= link_to 'Sign out', signout_path %></li>
+</ul>  
+<% else %>
+				<ul class="nav">
+				  <li><%= link_to 'Recipes', recipes_path %></li>
+				  <li><%= link_to 'Sign up', new_user_path %></li>
+				  <li><%= link_to 'Sign in', signin_path %></li>
+			  </ul>
+<% end %> 
+<div id="flash_messages" class="flash_style">
+          <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, :class => "flash #{key}") %>
+          <% end %>
+        </div>
+</div>  
+  <div id= "app-container"> 
+
     <%= yield %>
+    </div>
+    </div>  
+    </section> 
   </body>
 </html>

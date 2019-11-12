@@ -1,9 +1,11 @@
 $(function() {
+  console.log('recipe.js id loaded')
    clickHandlers()
+listenForSubmit()
   });
 
   //Link to user show page
- const clickHandler = () => {
+ const clickHandlers = () => {
 
   $('.user').on('click', function(event) {
     event.preventDefault()
@@ -27,6 +29,7 @@ $(function() {
       $("#description-" + id).text(descriptionText);
     });
   });
+
   };
 
 function User(user) {
@@ -57,6 +60,42 @@ function User(user) {
     </div> 
     return userhml;
   }
+
+  class Comment {
+  constructor(comment) {
+    this.id = comment.id;
+    this.body = comment.body;
+    this.user = comment.user;
+  }
+  addData() {
+    var html = " ";
+    html += '<blockquote>' + "<div class=\'commentDetials\' id=\'comment-\' + comment.id + '\'>" + "<strong>"
+      + this.user.name + "</strong>"
+      + "commented" + this.body + "</div>" + '</blockquote>';
+    $("div#submitted-comments").append(html);
+  }
+}
+
+function listenForSubmit() {
+  $("form#new_comment").on("submit", function(event) {
+    event.preventDefault();
+    var $form = $(this);
+    var action = $form.attr("action");
+    var params = $form.serialize();
+    $.ajax({
+      url: action,
+      data: params,
+      dataType: "json",
+      method: "POST"
+    })
+    .success(function(json) {
+    let comment = new Comment(json);
+      comment.addData();
+
+    })
+  })
+}
+
 
   
   
