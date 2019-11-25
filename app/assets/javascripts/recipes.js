@@ -1,5 +1,5 @@
 $(function() {
-  console.log('recipe.js id loaded')
+  console.log('recipe.js is loaded')
    clickHandlers()
 listenForSubmit()
   });
