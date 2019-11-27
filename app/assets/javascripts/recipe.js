@@ -63,11 +63,8 @@ function User(user) {
     </div>  <h2>Email: ${this.email}</h2>
     <ul class= "container details "> 
     <p> You have ${this.recipes.length} Recipie(s)  </p>
-     <p> < a href= "/users/${this.id}/recipes/new" > Add Recipe </a></p> 
-    <p> < a href= "/recipes"> All Recipes </a> </p>
-     <p> < a href= "/signout" data-id="${this.id}" > Log Out </a> </p> 
     </ul>    </div> `)
-    return userhtml;
+    return userHtml;
   }
 
   class Comment {
