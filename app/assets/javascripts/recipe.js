@@ -67,7 +67,7 @@ function User(user) {
     <p> < a href= "/recipes"> All Recipes </a> </p>
      <p> < a href= "/signout" data-id="${this.id}" > Log Out </a> </p> 
     </ul>    </div> `)
-    return userhml;
+    return userhtml;
   }
 
   class Comment {
