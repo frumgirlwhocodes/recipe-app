@@ -6,16 +6,16 @@ def index
       @user = User.find(params[:user_id])
       if @user.nil?
         redirect_to recipes_path, alert: "User not found"
+      else 
+        @recipes= @user.recipes 
+      end 
     else 
-      @recipes= @user.recipes 
-  end 
-  else 
-    @recipes = Recipe.all
-    respond_to do |format|
+      @recipes = Recipe.all
+    end 
+     respond_to do |format|
       format.html {render :index}
-      format.json {render json: @recipes}
-   end 
-  end 
+    format.json {render json: @recipes}
+    end 
 end 
   
 

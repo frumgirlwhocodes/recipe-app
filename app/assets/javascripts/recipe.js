@@ -1,3 +1,4 @@
+console.log('From recipe')
 $(function() {
   console.log('recipe.js is loaded')
    clickHandlers()
@@ -22,7 +23,7 @@ listenForSubmit()
 
 
         $('.js-more').on('click', function( ) {
-       let id = $(this).data("data-id");
+       let id = $(this).attr("data-id");
        $.get("/recipes/" + id + ".json", function(data) { 
            var recipe= data;
            var descriptionText= "<p>" + recipe["description"] + "</p>";
@@ -32,7 +33,7 @@ listenForSubmit()
 
   $('.js-next').on("click", function(){
     var nextId= parseInt($(".js-next").attr("data-id")) + 1;
-    $.get("/recipes" + nextId + ".json", function(data) {
+    $.get("/recipes/" + nextId + ".json", function(data) {
       var recipe=data;
       $(".recipeName").text(recipe["name"]);
       $(".chefName").text(recipe["user"]["name"]);
@@ -40,7 +41,8 @@ listenForSubmit()
       $(".recipeCookTime").text(recipe["cook_time"]);
       $(".recipeSteps").text(recipe["directions"]);
       $(".commentBody").text(recipe["comments"]["body"]); 
-      $(".recipeIngredeints").text(recipe["recipe_ingredients"]);
+      $(".recipeIngredients").text(recipe["recipe_ingredients"]["quanity"]);
+      $(".recipeIngredients").text(recipe["recipe_ingredients"]["ingredient"]);
       $(".js-next").attr("data-id", recipe["id"]);
     })
   });
@@ -54,25 +56,17 @@ function User(user) {
     this.recipes = user.recipes;
   }
  User.prototype.userShow= function() {
-    let userHtml= 
-   
-   <div class= "container"> 
+    let userHtml= (`
+    <div class= "container"> 
     <div class="container name" style="border-bottom:1px solid black">
     <h1>  Welcome ${this.name}  </h1> 
-    </div> 
-    
-    <h2>Email: ${this.email}</h2>
-  
-      <ul class= "container details "> 
+    </div>  <h2>Email: ${this.email}</h2>
+    <ul class= "container details "> 
     <p> You have ${this.recipes.length} Recipie(s)  </p>
-     
-    <p> < a href= "/users/${this.id}/recipes/new" > Add Recipe </a></p> 
-    
+     <p> < a href= "/users/${this.id}/recipes/new" > Add Recipe </a></p> 
     <p> < a href= "/recipes"> All Recipes </a> </p>
-    
-    <p> < a href= "/signout" data-id="${this.id}" > Log Out </a> </p> 
-    </ul> 
-    </div> 
+     <p> < a href= "/signout" data-id="${this.id}" > Log Out </a> </p> 
+    </ul>    </div> `)
     return userhml;
   }
 
@@ -110,13 +104,3 @@ function listenForSubmit() {
     })
   })
 }
-
-
-  
-  
-
-
-
- 
-  
- 
