@@ -2,7 +2,7 @@ console.log('From recipe')
 $(function() {
   console.log('recipe.js is loaded')
    clickHandlers()
-listenForSubmit()
+
   });
 
   //Link to user show page
@@ -26,7 +26,7 @@ listenForSubmit()
        let id = $(this).attr("data-id");
        $.get("/recipes/" + id + ".json", function(data) { 
            var recipe= data;
-           var descriptionText= "<p>" + recipe["description"] + "</p>";
+           var descriptionText=  recipe["description"] ;
       $("#description-" + id).text(descriptionText);
     });
   });
@@ -41,6 +41,7 @@ listenForSubmit()
       $(".recipeCookTime").text(recipe["cook_time"]);
       $(".recipeSteps").text(recipe["directions"]);
       $(".commentBody").text(recipe["comments"]["body"]); 
+      $(".commentDetails").text(recipe["comments"]);
       $(".recipeIngredients").text(recipe["recipe_ingredients"]["quanity"]);
       $(".recipeIngredients").text(recipe["recipe_ingredients"]["ingredient"]);
       $(".js-next").attr("data-id", recipe["id"]);
@@ -95,6 +96,7 @@ function listenForSubmit() {
       method: "POST"
     })
     .success(function(json) {
+      $(".commentBox").val("");
     let comment = new Comment(json);
       comment.addData();
 
