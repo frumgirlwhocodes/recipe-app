@@ -22,6 +22,8 @@
     <h2><%= link_to recipe.name, recipe_path(recipe)%></h2>
     <p id="description-<%= recipe.id %>"> <%= truncate(recipe.description, length:25)%></p>
               <a href="#" class="js-more"  data-id="<%= recipe.id %>">Read more</a>
+              <meta name="csrf-token" content="{{ csrf_token() }}">
+              <a href= "#" class="js-delete" data-id= "<%= recipe.id %>"> Delete </a> 
               </div> 
     <% end %>
   

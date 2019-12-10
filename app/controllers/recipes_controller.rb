@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  skip_before_action :verify_authenticity_token, except: [ :destroy, :update]
 
 def index 
     @recent_recipes=Recipe.recently_added_recipes
@@ -93,10 +94,17 @@ end
         end
 
         def destroy
+          
           @recipe=Recipe.find(params[:id])
-          @recipe.destroy
-          redirect_to user_recipes_path, notice: "Recipe successfully destroyed."
+          @user=@recipe.user
+          @recipe.destroy   
+          respond_to do |format|
+           format.html { redirect_to user_recipes_path(@user)}
+            format.json {render json: @recipe}
+           end
+        
         end
+    
 
      
      private 

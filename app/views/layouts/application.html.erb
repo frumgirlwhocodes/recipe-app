@@ -3,7 +3,7 @@
   <head>
  
  <title> Recipe App </title> 
-    <%= csrf_meta_tags %>
+ <%= csrf_meta_tag %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -23,7 +23,6 @@
 <li> <%= link_to "All Recipes", user_recipes_path(current_user) %> </li> 
 <li> <%= link_to "Add a new recipe", new_user_recipe_path(current_user) %> </li> 
 <li><%= link_to "My Profile", user_path(current_user), class:'user' %></li> <br> 
-<a href="#"><%=current_user.name %></a>  
 <li><%= link_to 'Sign out', signout_path %></li>
 </ul>  
 <% else %>

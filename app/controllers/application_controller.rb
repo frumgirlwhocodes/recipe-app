@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 helper_method :current_user, :requre_login
-
+protect_from_forgery with: :null_session
 private 
 
 
