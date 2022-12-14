@@ -38,7 +38,7 @@ gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem "pry"
 gem "bcrypt"
-gem 'loofah', '~> 2.2.1'
+gem 'loofah', '~> 2.19.1'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 
